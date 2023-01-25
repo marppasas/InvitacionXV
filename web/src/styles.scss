@@ -23,40 +23,39 @@ p, label { font-family: $font-paragraph; }
     padding: 16px !important;
 }
 
-button {
+.btn {
+    position: relative;
+    border: 0; outline: 0;
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-size: 16px;
+    display: block;
     cursor: pointer;
+    font-family: $font-title;
+    text-decoration: none;
 
-    &.btn {
-        position: relative;
-        border: 0; outline: 0;
-        border-radius: 4px;
-        padding: 8px 12px;
-        font-size: 16px;
+    &.btn-primary {
+        background-color: $blueColor;
+        color: white;
+    }
 
-        &.btn-primary {
-            background-color: $blueColor;
-            color: white;
+    &.btn-tertiary {
+        background-color: transparent;
+        color: darkslategray;
+
+        &::after {
+            content: '';
+            height: 2px;
+            background-color: darkslategray;
+            position: absolute;
+            left: 10px; right: calc(100% - 10px);
+            bottom: 3px;
+            transition: right .1s;
         }
 
-        &.btn-tertiary {
-            background-color: transparent;
-            color: darkslategray;
-
-            &::after {
-                content: '';
-                height: 2px;
-                background-color: darkslategray;
-                position: absolute;
-                left: 10px; right: calc(100% - 10px);
-                bottom: 3px;
-                transition: right .1s;
-            }
-
-            &:hover::after {
-                right: 10px;
-            }
+        &:hover::after {
+            right: 10px;
         }
-
     }
 
     &:disabled {
