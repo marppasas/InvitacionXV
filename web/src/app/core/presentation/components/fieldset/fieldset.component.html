@@ -1,0 +1,18 @@
+<div class="container"
+     [ngClass]="{ 'on-top': labelOnTop }">
+    <label (click)="onFocus()">
+        {{ name }}
+    </label>
+    <input #input
+           [type]="type"
+           [ngModel]="this.value"
+           [placeholder]="!!placeholder && placeholder.length && labelOnTop ? placeholder : ''"
+           (focusin)="onFocus()"
+           (focusout)="lostFocus()"
+           (ngModelChange)="onChange($event)">
+    <div id="bar"></div>
+    <p *ngIf="errorMsg != null && errorMsg.length"
+       id="error">
+        {{ errorMsg }}
+    </p>
+</div>

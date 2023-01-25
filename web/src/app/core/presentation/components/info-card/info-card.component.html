@@ -1,0 +1,9 @@
+<div class="container">
+    <app-icon [icon]="iconName"></app-icon>
+    <h2>{{ title }}</h2>
+    <hr>
+    <ng-container #ref>
+        <ng-content></ng-content>
+    </ng-container>
+    <p *ngIf="!ref.childNodes.length && description != null && description.length">{{ description }}</p>
+</div>

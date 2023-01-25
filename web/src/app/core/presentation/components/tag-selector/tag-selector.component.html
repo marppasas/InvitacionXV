@@ -1,0 +1,8 @@
+<div id="container">
+    <div *ngFor="let tag of tagSelection"
+         class="tag"
+         [ngClass]="tag.value ? 'selected' : ''"
+         (click)="onTagClicked(tag)">
+        <p>{{ tag.displayText }}</p>    
+    </div>
+</div>

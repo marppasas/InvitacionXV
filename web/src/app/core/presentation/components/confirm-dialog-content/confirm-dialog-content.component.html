@@ -1,0 +1,15 @@
+<div style="padding: 24px;">
+    <h2>{{ data.title }}</h2>
+    <p>{{ data.body }}</p>
+    
+    <div class="actions">
+        <button class="btn btn-tertiary"
+                (click)="close()">
+            Cancelar
+        </button>
+        <button class="btn btn-primary"
+                (click)="data.onConfirm()">
+            {{ data.confirmText }}
+        </button>
+    </div>
+</div>

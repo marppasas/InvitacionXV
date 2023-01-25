@@ -1,0 +1,132 @@
+@import '../../../../../assets/styles/colors.scss';
+
+:host {
+    #invitation-card {
+        position: relative;
+
+        #img {
+            background-color: white;
+            height: 100vh;
+            max-width: 520px;
+            width: 100%;
+            margin: auto;
+        }
+
+        .contents {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%);
+            text-align: center;
+        }
+    }
+
+    .row {
+        max-width: 1200px;
+        margin: auto;
+        align-items: flex-start;
+
+        &.cards {
+            margin-top: 32px;
+        }
+    }
+
+    .map-container {
+        border-radius: 8px;
+        background-color: white;
+        width: 80%;
+        max-width: 800px;
+        margin: 32px auto;
+        overflow: hidden;
+
+        .map {
+            height: 280px;
+        }
+
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px;
+
+            .actions {
+                display: flex;
+                justify-content: flex-end;
+            }
+        }
+    }
+
+    #form-divider {
+        width: 640px;
+        max-width: 65%;
+        margin: 32px auto;
+    }
+
+    .confirm {
+        padding-bottom: 32px;
+        max-width: 800px;
+        width: 85%;
+        margin: auto;
+
+        .header {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            margin-bottom: 16px;
+            text-align: center;
+
+            .title {
+                font-size: 48px;
+            }
+        }
+
+        form {
+            padding: 32px;
+            background-color: white;
+            border-radius: 12px;
+
+            app-fieldset {
+                margin-bottom: 8px;
+            }
+
+            .tagSelector  {
+                margin-bottom: 8px;
+                
+                label {
+                    margin-bottom: 4px;
+                    display: block;
+                }
+            }
+
+            .busCheck {
+                display: flex;
+                align-items: center;
+                margin: 8px 0;
+            }
+
+            button {
+                margin-top: 16px;
+            }
+        }
+    }
+
+    footer {
+        padding: 64px;
+        background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.1));
+
+        #mark {
+            color: darkslategray;
+        }
+
+        a {
+            color: darkslategray;
+            font-size: 16px;
+            transition: color .2s;
+            
+            &:not(:last-child) { margin-right: 8px; }
+
+            &:hover {
+                color: tomato;
+            }
+        }
+    }
+}

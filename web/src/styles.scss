@@ -1,0 +1,76 @@
+@import './assets/styles/colors.scss', './assets/styles/fonts.scss';
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+* {
+    user-select: none;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, p, label { margin: 0; }
+
+h1, h2, h3, h4, h5 { font-family: $font-title; }
+
+h3, h4, h5 { font-weight: lighter; }
+
+p, label { font-family: $font-paragraph; }
+
+.mat-dialog-container {
+    padding: 16px !important;
+}
+
+button {
+    cursor: pointer;
+
+    &.btn {
+        position: relative;
+        border: 0; outline: 0;
+        border-radius: 4px;
+        padding: 8px 12px;
+        font-size: 16px;
+
+        &.btn-primary {
+            background-color: $blueColor;
+            color: white;
+        }
+
+        &.btn-tertiary {
+            background-color: transparent;
+            color: darkslategray;
+
+            &::after {
+                content: '';
+                height: 2px;
+                background-color: darkslategray;
+                position: absolute;
+                left: 10px; right: calc(100% - 10px);
+                bottom: 3px;
+                transition: right .1s;
+            }
+
+            &:hover::after {
+                right: 10px;
+            }
+        }
+
+    }
+
+    &:disabled {
+        opacity: 0.5;
+        pointer-events: none;
+    }
+}
+
+.shadow-sm {
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.15);
+}
+
+.shadow-sm-offset {
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.15);
+}
