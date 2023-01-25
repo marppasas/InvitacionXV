@@ -81,6 +81,8 @@ export class HomePageComponent implements OnInit {
                         this.sendAsist(true);
                     }
                 });
+            } else {
+                this.dialogService.confirm('Muchas gracias!', 'Tu asistencia fue confirmada.', 'Aceptar', () => { });
             }
         });
     }
