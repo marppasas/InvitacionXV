@@ -110,8 +110,13 @@
     }
 
     footer {
-        padding: 64px;
+        padding: 32px;
         background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.1));
+
+        .row {
+            max-width: 100%;
+            text-align: center;
+        }
 
         #mark {
             color: darkslategray;
