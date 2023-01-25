@@ -90,7 +90,7 @@ export class ApiBaseService {
                     return new Observable<ApiServiceResult>(subscriber => {
                         let errorMessage;
                         if (x instanceof HttpErrorResponse) {
-                            errorMessage = JSON.parse(x.error).body;
+                            errorMessage = JSON.parse(x.error);
                         } else {
                             errorMessage = x.message;
                         }

@@ -17,40 +17,51 @@ class AsistController extends ControllerBase {
     public function SendAsist(string $firstName, string $lastName, string $dni, string $foodTags, bool $useBus, string $phone = null, bool $override = FALSE): HttpResponse
     {
         if (is_null($firstName) || strlen(trim($firstName)) == 0) {
-            return $this->BadRequest("El campo Nombre es obligatorio.");
+            return $this->BadRequest("El campo Nombre es obligatorio.", -1);
         }
         
         if (is_null($lastName) || strlen(trim($lastName)) == 0) {
-            return $this->BadRequest("El campo Apellido es obligatorio.");
+            return $this->BadRequest("El campo Apellido es obligatorio.", -2);
         }
 
         $dni = $this->FixDNI($dni);
         if (is_null($dni)) {
-            return $this->BadRequest("El número de cédula es inválida.");
+            return $this->BadRequest("El número de cédula es inválida.", -3);
         }
         
-        $tags = explode(",", $foodTags);
-        foreach ($tags as &$tag) {
-            $tag = trim(mb_strtolower($tag));
-            if (!in_array($tag, self::AVAILABLE_FOOD_TAGS)) {
-                return $this->BadRequest("\"{ucfirst($tag)}\" no es un menú disponible.");
+        if (trim($foodTags) == '') {
+            $foodTags = NULL;
+        } else {
+            $tags = explode(",", $foodTags);
+            foreach ($tags as &$tag) {
+                $tag = trim(mb_strtolower($tag));
+                if (!in_array($tag, self::AVAILABLE_FOOD_TAGS)) {
+                    $str = ucfirst($tag);
+                    return $this->BadRequest("\"{$str}\" no es un menú disponible.", -4);
+                }
             }
+            $foodTags = count($tags) > 0 ? ucfirst(implode(", ", $tags)) : NULL;
         }
-        $foodTags = count($tags) > 0 ? ucfirst(implode(", ", $tags)) : NULL;
 
         if (!$this->ValidatePhone($phone)) {
-            return $this->BadRequest("El número de celular no es válido.");
+            return $this->BadRequest("El número de celular no es válido.", -5);
         }
 
         $qry = $this->db->prepare("SELECT COUNT(*) FROM asist WHERE dni = :dni");
         $qry->execute([
             "dni" => $dni
         ]);
-        if ($qry->fetch(PDO::FETCH_ASSOC)["COUNT(*)"] > 0) {
-            return $this->Forbidden("La cédula $dni ya fue confirmada.");
+        $exists = $qry->fetch(PDO::FETCH_ASSOC)["COUNT(*)"] > 0;
+        if ($exists && !$override) {
+            return $this->Forbidden("La cédula $dni ya fue confirmada.", -6);
         }
 
-        $qry = $this->db->prepare("INSERT INTO asist VALUES (NULL, :firstName, :lastName, :dni, :foodTags, :useBus, :phone, CURRENT_TIMESTAMP, NULL)");
+        if ($exists) {
+            $qry = $this->db->prepare("UPDATE asist SET firstName = :firstName, lastName = :lastName, foodTags = :foodTags, useBus = :useBus, phone = :phone WHERE dni = :dni");
+        } else {
+            $qry = $this->db->prepare("INSERT INTO asist VALUES (NULL, :firstName, :lastName, :dni, :foodTags, :useBus, :phone, CURRENT_TIMESTAMP, NULL)");
+        }
+
         $qry->execute([
             "firstName" => $firstName,
             "lastName" => $lastName,

@@ -50,7 +50,7 @@ export class HomePageComponent implements OnInit {
         this.form.controls['foodTags'].patchValue(this.capitalize(this.selectedFoodTags.join(', ')));
     }
 
-    public sendAsist(): void {
+    public sendAsist(override: boolean = false): void {
         if (this.form.invalid) {
             return;
         }
@@ -62,11 +62,24 @@ export class HomePageComponent implements OnInit {
             this.form.controls['foodTags'].value,
             this.form.controls['bus'].value,
             this.form.controls['phone'].value,
-            false
+            override
         ).subscribe((s) => {
             if (!s.status) {
-                this.dialogService.confirm('Ups!', s.content, 'Aceptar', () => {
-                    
+                let msg: string;
+                let dniConfirmed: boolean = false;
+                if (typeof s.content == 'string') {
+                    msg = s.content;
+                } else {
+                    msg = s.content.body as string;
+                    dniConfirmed = s.content.code == '-6';
+                    if (dniConfirmed) {
+                        msg += ' ¿Querés volver a enviar los datos?';
+                    }
+                }
+                this.dialogService.confirm('Ups!', msg, 'Aceptar', () => {
+                    if (dniConfirmed) {
+                        this.sendAsist(true);
+                    }
                 });
             }
         });
@@ -94,18 +107,6 @@ export class HomePageComponent implements OnInit {
 
     private capitalize(input: string): string {
         return input.length ? input[0].toUpperCase() + input.substring(1).toLowerCase() : '';
-    }
-    
-    private sendImpl(override: boolean): Observable<ApiServiceResult> {
-        return this.homeService.sendAsist(
-            this.form.controls['firstName'].value,
-            this.form.controls['lastName'].value,
-            this.form.controls['dni'].value,
-            this.form.controls['foodTags'].value,
-            this.form.controls['bus'].value,
-            this.form.controls['phone'].value,
-            override
-        );
     }
 
 }
