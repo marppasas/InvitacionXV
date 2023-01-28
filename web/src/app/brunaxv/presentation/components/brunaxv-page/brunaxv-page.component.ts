@@ -5,14 +5,14 @@ import { ValidatorsExtension } from "src/app/core/extensions";
 import { MapOptions, Tag } from "src/app/core/presentation/components";
 import { ApiServiceResult } from "src/app/core/presentation/services/api-base.service";
 import { DialogService } from "src/app/core/presentation/services/dialog.service";
-import { HomeService } from "../../services/home.service";
+import { BrunaXVService } from "../../services/brunaxv.service";
 
 @Component({
-    selector: 'app-home-page',
-    templateUrl: './home-page.component.html',
-    styleUrls: [ './home-page.component.scss' ] 
+    selector: 'app-brunaxv-page',
+    templateUrl: './brunaxv-page.component.html',
+    styleUrls: [ './brunaxv-page.component.scss' ] 
 })
-export class HomePageComponent implements OnInit {
+export class BrunaXVPageComponent implements OnInit {
 
     public form: FormGroup;
     public mapOptions: MapOptions;
@@ -23,7 +23,7 @@ export class HomePageComponent implements OnInit {
 
     constructor(
         private fb: FormBuilder,
-        private homeService: HomeService,
+        private homeService: BrunaXVService,
         private dialogService: DialogService,
     ) {}
 

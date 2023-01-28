@@ -2,8 +2,8 @@ import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { ReactiveFormsModule } from "@angular/forms";
 import { CoreModule } from "src/app/core/core.module";
-import { HomePageComponent } from "./components";
-import { HomeService } from "./services/home.service";
+import { BrunaXVPageComponent } from "./components";
+import { BrunaXVService } from "./services/brunaxv.service";
 
 @NgModule({
     imports: [
@@ -12,13 +12,13 @@ import { HomeService } from "./services/home.service";
         CommonModule,
     ],
     declarations: [
-        HomePageComponent,
+        BrunaXVPageComponent,
     ],
     exports: [
-        HomePageComponent,
+        BrunaXVPageComponent,
     ],
     providers: [
-        HomeService,
+        BrunaXVService,
     ]
 })
 export class PresentationModule {}
