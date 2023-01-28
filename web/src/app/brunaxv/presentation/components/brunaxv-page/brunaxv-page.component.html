@@ -113,11 +113,18 @@
             </app-tag-selector>
         </div>
         <div fade-in
-             class="busCheck">
+             class="chbox">
             <input id="bus"
                    type="checkbox"
                    formControlName="bus">
             <label for="bus">Voy a ir en el bus (solo adolescentes).</label>
+        </div>
+        <div fade-in
+             class="chbox">
+            <input id="tc"
+                   type="checkbox"
+                   formControlName="allowTc">
+            <label for="tc">Autorizo el uso de mis datos según la <a href="https://www.impo.com.uy/bases/leyes/18719-2010">ley 18.719</a>.</label>
         </div>
         <button class="btn btn-primary"
                 [disabled]="form.invalid">Enviar</button>

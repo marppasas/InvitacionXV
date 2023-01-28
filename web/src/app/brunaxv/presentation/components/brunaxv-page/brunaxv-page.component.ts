@@ -95,6 +95,7 @@ export class BrunaXVPageComponent implements OnInit {
             dni: new FormControl('', [ Validators.required, ValidatorsExtension.dni ]),
             foodTags: new FormControl(''),
             bus: new FormControl(false),
+            allowTc: new FormControl(false, [ Validators.requiredTrue ]),
         });
     }
 
