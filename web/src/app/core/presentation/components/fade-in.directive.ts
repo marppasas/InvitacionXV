@@ -30,6 +30,7 @@ export class FadeInDirective implements OnInit {
         this.elem.style.opacity = '0';
 
         window.addEventListener("scroll", () => this.fadeIn());
+        window.addEventListener("load", () => this.fadeIn());
     }
 
     private fadeIn(): void {
