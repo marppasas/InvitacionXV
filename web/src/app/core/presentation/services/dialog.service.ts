@@ -37,10 +37,12 @@ export class DialogService {
         return this.dialogRef;
     }
 
-    public confirm(title: string, body: string, confirmText: string, onConfirm: () => void): void {
+    public confirm(title: string, body: string, confirmText: string = 'Continuar', onConfirm?: () => void): void {
         let confirmDialog: MatDialogRef<any> | null = null;
         const confirmFn = () => {
-            onConfirm();
+            if (!!onConfirm) {
+                onConfirm();
+            }
             confirmDialog?.close();
         }
         

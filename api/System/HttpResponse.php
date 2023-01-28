@@ -8,7 +8,7 @@ class HttpResponse {
 
     private string $header = "HTTP/1.1 200 OK";
     private int $code = 1;
-    private ?string $body = NULL;
+    private $body = NULL;
 
     public function __construct(HttpRequest $request)
     {
@@ -38,7 +38,7 @@ class HttpResponse {
         $this->code = $code;
     }
 
-    public function SetBody(?string $body = NULL): void
+    public function SetBody($body = NULL): void
     {
         $this->body = $body;
     }

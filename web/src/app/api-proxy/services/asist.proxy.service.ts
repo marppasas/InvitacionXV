@@ -9,4 +9,6 @@ export class AsistProxyService extends ApiBaseService {
     readonly sendAsist = (firstName: string, lastName: string, dni: string, foodTags: string, useBus: boolean, phone: string, override: boolean) =>
         this.callPost('SendAsist', { firstName, lastName, dni, foodTags, useBus, phone, override });
     
+    readonly getAllAsist = (passcode: string) => this.callGet('GetAllAsist', { passcode });
+
 }

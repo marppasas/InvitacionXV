@@ -74,6 +74,18 @@ class AsistController extends ControllerBase {
         return $this->NoContent();
     }
 
+    public function GetAllAsist(string $passcode): HttpResponse {
+        if ($passcode != $_ENV['PASSCODE']) {
+            return $this->Unauthorized();
+        }
+
+        $qry = $this->db->prepare('SELECT firstName as Nombre, lastName as Apellido, dni as CI, foodTags as Menu, useBus as UsaTransporte, phone as Teléfono FROM asist WHERE deletedDateTime IS NULL');
+        $qry->execute();
+        $result = $qry->fetchAll(PDO::FETCH_ASSOC);
+
+        return $this->Ok($result);
+    }
+
     private function FixDNI(string $dni): ?string
     {
         $dni = preg_replace("/(\.|\-)/", "", $dni);
