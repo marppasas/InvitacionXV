@@ -33,10 +33,16 @@ p, label { font-family: $font-paragraph; }
     cursor: pointer;
     font-family: $font-title;
     text-decoration: none;
+    transition: all .15s;
 
     &.btn-primary {
-        background-color: $blueColor;
+        background-color: #e4c200;
         color: white;
+
+        &:hover {
+            transform: translate(-2px, -2px) scale(1.025);
+            box-shadow: 4px 4px 4px 0 rgba(0, 0, 0, 0.15);
+        }
     }
 
     &.btn-tertiary {
