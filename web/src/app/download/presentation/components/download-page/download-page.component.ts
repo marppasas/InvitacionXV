@@ -52,7 +52,7 @@ export class DownloadPageComponent implements OnInit {
         const a = document.createElement('a');
         document.body.appendChild(a);
         a.setAttribute("href", dataStr);
-        a.setAttribute("download", "test.csv");
+        a.setAttribute("download", "invitados.csv");
         a.click();
         a.remove();
     }
