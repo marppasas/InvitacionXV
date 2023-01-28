@@ -5,14 +5,14 @@
         gap: 8px;
 
         .tag {
-            background-color: rgb(113, 255, 255);
-            border: 2px solid rgb(0, 201, 201);
+            background-color: #e4c200;
+            border: 2px solid #c8aa00;
             border-radius: 16px;
             padding: 4px 10px;
             cursor: pointer;
             opacity: 0.5;
             transition: opacity .2s;
-            color: darkslategray;
+            color: white;
 
             &.selected {
                 opacity: 1;
