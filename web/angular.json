@@ -84,6 +84,9 @@
             "production": {
               "browserTarget": "InvitacionXV:build:production"
             },
+            "demo": {
+              "browserTarget": "InvitacionXV:build:demo"
+            },
             "development": {
               "browserTarget": "InvitacionXV:build:development"
             }
