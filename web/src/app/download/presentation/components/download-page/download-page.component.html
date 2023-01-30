@@ -3,11 +3,13 @@
         <form class="shadow-sm-offset"
               [formGroup]="form"
               (ngSubmit)="download()">
-            <app-fieldset name="Contraseña"
+            <app-fieldset #downloadInput
+                          name="Contraseña"
                           formControlName="passcode"
                           type="password">
             </app-fieldset>
-            <button class="btn btn-primary">
+            <button class="btn btn-primary"
+                    [disabled]="form.invalid">
                 Descargar
             </button>
         </form>

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FieldsetComponent } from 'src/app/core/presentation/components';
 import { DialogService } from 'src/app/core/presentation/services/dialog.service';
 import { environment } from 'src/environments/environment';
 import { DownloadService } from '../../services';
@@ -11,6 +12,9 @@ import { DownloadService } from '../../services';
 })
 export class DownloadPageComponent implements OnInit {
     
+    @ViewChild('downloadInput')
+    private downloadInput: FieldsetComponent;
+
     public form: FormGroup;
 
     constructor(
@@ -37,6 +41,10 @@ export class DownloadPageComponent implements OnInit {
 
                     this.downloadImpl(csv.map(e => e.join(",")).join("\n"));
                 }
+
+                this.dialogService.confirm('Archivo descargado', 'Has descargado el archivo con la información de los invitados.');
+            } else {
+                this.downloadInput.manuallySetErrorMessage(r.content.code == 401 ? 'La contraseña es incorrecta.' : 'Ha ocurrido un error inesperado.');
             }
         });
     }

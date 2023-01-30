@@ -47,6 +47,8 @@ export class FieldsetComponent implements OnInit, ControlValueAccessor {
             this.inputElement.nativeElement.focus();
             this.labelOnTop = true;
         }
+
+        this.errorMsg = '';
     }
 
     public lostFocus(): void {
@@ -72,6 +74,10 @@ export class FieldsetComponent implements OnInit, ControlValueAccessor {
                 this.errorMsg = 'Este campo es inválido.';
             }
         }
+    }
+
+    public manuallySetErrorMessage(s: string): void {
+        this.errorMsg = s;
     }
 
     registerOnChange(fn: (_: string) => void) {
