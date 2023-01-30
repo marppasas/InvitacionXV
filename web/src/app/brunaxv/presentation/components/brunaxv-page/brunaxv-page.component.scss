@@ -44,6 +44,22 @@
             .actions {
                 display: flex;
                 justify-content: flex-end;
+
+                a {
+                    display: block;
+                    flex-shrink: 0;
+                    white-space: nowrap;
+                }
+            }
+
+            @media all and (max-width:500px) {
+                flex-direction: column;
+
+                .actions {
+                    margin-top: 4px;
+                    width: 100%;
+                    align-items: flex-end;
+                }
             }
         }
     }
