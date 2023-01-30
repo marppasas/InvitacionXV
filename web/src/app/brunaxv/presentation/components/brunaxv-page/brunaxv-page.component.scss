@@ -94,9 +94,19 @@
                 display: flex;
                 align-items: center;
                 margin: 8px 0;
+
+                #tc-info {
+                    cursor: pointer;
+                    background-color: transparent;
+                    border: none; outline: none;
+                    color: darkslategray;
+                    transition: all .2s;
+
+                    &:hover { color: #e4c200; }
+                }
             }
 
-            button {
+            #confirm-btn {
                 margin-top: 16px;
             }
         }

@@ -125,10 +125,17 @@
             <input id="tc"
                    type="checkbox"
                    formControlName="allowTc">
-            <label for="tc">Autorizo el uso de mis datos según la <a href="https://www.impo.com.uy/bases/leyes/18719-2010">ley 18.719</a>.</label>
+            <label for="tc">Autorizo el uso de mis datos según la <a href="https://www.impo.com.uy/bases/leyes/18719-2010" target="_blank">ley 18.719</a>.</label>
+            <button id="tc-info"
+                    (click)="showTCInfo()">
+                <app-icon icon="info"></app-icon>
+            </button>
         </div>
-        <button class="btn btn-primary"
-                [disabled]="form.invalid">Enviar</button>
+        <button id="confirm-btn"
+                class="btn btn-primary"
+                [disabled]="form.invalid">
+            Enviar
+        </button>
         <p class="error">{{ apiError }}</p>
     </form>
 </div>

@@ -1,7 +1,7 @@
 import { Component, Input } from "@angular/core";
 import { IconDefinition, RotateProp } from "@fortawesome/fontawesome-svg-core";
-import { faBlackTie, faGithub, faInstagram, faLinkedin, faUps } from "@fortawesome/free-brands-svg-icons";
-import { faBriefcase, faBus, faCar, faGift, faGifts, faGlassCheers, faLocationArrow, faMap, faMapMarked, faNetworkWired, faVest, faWineGlass } from "@fortawesome/free-solid-svg-icons";
+import { faBlackTie, faGithub, faInstagram, faLinkedin } from "@fortawesome/free-brands-svg-icons";
+import { faBriefcase, faBus, faCar, faGift, faGifts, faInfoCircle, faLocationArrow, faMap, faMapMarked, faVest, faWineGlass } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
     selector: 'app-icon',
@@ -24,6 +24,7 @@ export class IconComponent {
             case 'linkedin': return faLinkedin;
             case 'github': return faGithub;
             case 'briefcase': return faBriefcase;
+            case 'info': return faInfoCircle;
             default:
                 throw new Error(`${this.icon} icon does not exists`);
         }
