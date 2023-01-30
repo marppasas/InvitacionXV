@@ -88,15 +88,7 @@ export class BrunaXVPageComponent implements OnInit {
     }
 
     public dniValidation(s: string): string {
-        if (![7,8].includes(s.length)) {
-            return s;
-        }
-        
         let dni = s.replace(/(\.|\-)/g, '');
-        if (s.length == 8) {
-            dni = `${dni.substring(0, 1)}.${dni.substring(1, 4)}.${dni.substring(4, 7)}-${dni.substring(7)}`;
-        }
-
         switch (s.length) {
             case 8:
                 dni = `${dni.substring(0, 1)}.${dni.substring(1, 4)}.${dni.substring(4, 7)}-${dni.substring(7)}`;
@@ -104,6 +96,8 @@ export class BrunaXVPageComponent implements OnInit {
             case 7:
                 dni = `${dni.substring(0, 3)}.${dni.substring(3, 6)}-${dni.substring(6)}`;
                 break;
+            default:
+                dni = s;
         }
         return dni;
     }
