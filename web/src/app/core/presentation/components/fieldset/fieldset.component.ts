@@ -1,4 +1,4 @@
-import { Component, ElementRef, forwardRef, Inject, Injector, INJECTOR, Input, OnInit, Optional, Self, ViewChild } from "@angular/core";
+import { Component, ElementRef, forwardRef, Inject, Injector, INJECTOR, Input, OnInit, Output, EventEmitter, ViewChild } from "@angular/core";
 import { ControlValueAccessor, NgControl, NG_VALUE_ACCESSOR } from "@angular/forms";
 
 @Component({
@@ -18,6 +18,7 @@ export class FieldsetComponent implements OnInit, ControlValueAccessor {
     @Input() name: string;
     @Input() type: 'text' | 'email' | 'password' | 'phone';
     @Input() placeholder: string;
+    @Input() manualValidation?: (s: string) => string;
 
     onChange: (_: any) => void;
     onTouched: () => void = () => { };
@@ -52,6 +53,7 @@ export class FieldsetComponent implements OnInit, ControlValueAccessor {
     }
 
     public lostFocus(): void {
+        this.value = this.manualValidation != null ? this.manualValidation(this.value) : this.value;
         if (this.value.trim() == '') {
             this.labelOnTop = false;
             this.value = '';
