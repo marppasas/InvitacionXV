@@ -18,6 +18,7 @@ export class FieldsetComponent implements OnInit, ControlValueAccessor {
     @Input() name: string;
     @Input() type: 'text' | 'email' | 'password' | 'phone';
     @Input() placeholder: string;
+    @Input() info?: string;
     @Input() manualValidation?: (s: string) => string;
 
     onChange: (_: any) => void;
@@ -25,7 +26,6 @@ export class FieldsetComponent implements OnInit, ControlValueAccessor {
 
     public labelOnTop: boolean = false;
     public errorMsg: string | null = null;
-
     @ViewChild('input')
     private inputElement: ElementRef;
 

@@ -11,8 +11,14 @@
            (focusout)="lostFocus()"
            (ngModelChange)="onChange($event)">
     <div id="bar"></div>
+    <p *ngIf="info != null && info.length && (errorMsg == null || !errorMsg.length)"
+       id="info"
+       class="bottom-txt">
+        {{ info }}
+    </p>
     <p *ngIf="errorMsg != null && errorMsg.length"
-       id="error">
+       id="error"
+       class="bottom-txt">
         {{ errorMsg }}
     </p>
 </div>

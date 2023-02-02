@@ -37,13 +37,20 @@
             }
         }
 
-        #error {
-            color: #d90000;
+        .bottom-txt {
             white-space: nowrap;
             width: 100%;
             text-overflow: ellipsis;
             overflow: hidden;
             font-size: 14px;
+        }
+
+        #error {
+            color: #d90000;
+        }
+
+        #info {
+            color: gray;
         }
 
         &.on-top {
