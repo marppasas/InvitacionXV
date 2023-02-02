@@ -102,10 +102,6 @@ export class BrunaXVPageComponent implements OnInit {
         return dni;
     }
 
-    public showTCInfo(): void {
-        this.dialogService.confirm('Uso de tus datos', 'Los datos ingresados en este formulario serán utilizados únicamente a los efectos de la invitación y asistencia.');
-    }
-
     private initForm(): void {
         this.form = this.fb.group({
             firstName: new FormControl('', [ Validators.required ]),
