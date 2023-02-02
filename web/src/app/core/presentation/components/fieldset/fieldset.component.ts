@@ -48,8 +48,6 @@ export class FieldsetComponent implements OnInit, ControlValueAccessor {
             this.inputElement.nativeElement.focus();
             this.labelOnTop = true;
         }
-
-        this.errorMsg = '';
     }
 
     public lostFocus(): void {
@@ -86,6 +84,7 @@ export class FieldsetComponent implements OnInit, ControlValueAccessor {
         this.onChange = (inputText: string) => {
             if (this._value != inputText) {
                 this._value = inputText;
+                this.errorMsg = '';
                 fn(inputText);
             }
         };
