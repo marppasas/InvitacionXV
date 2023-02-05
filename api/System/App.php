@@ -8,6 +8,7 @@ use Exception;
 use ReflectionMethod;
 use ReflectionParameter;
 use System\Exceptions\WebException;
+use PHPMailer\PHPMailer\PHPMailer;
 
 class App {
 
@@ -179,7 +180,6 @@ class App {
         if($method == "OPTIONS") {
             die();
         }
-
     }
 
     private function HandleException($e): void
@@ -188,10 +188,66 @@ class App {
             trim($e->getMessage()) :
             'Ha ocurrido un error inesperado.';
 
+        if (!($e instanceof WebException)) {
+            $idx = $this->TrySaveInDB($e);
+            $this->TrySendEmail($e, $idx);
+        }
+
         $response = new HttpResponse($this->http);
         $response->SetBody($errorMessage);
         $response->SetCode(-1);
         $response->Print();
+    }
+
+    private function TrySaveInDB(Exception $e): int {
+        $id = -1;
+        try {
+            $db = Database::Init();
+            $qry = $db->prepare("INSERT INTO errors VALUES(NULL, :errorMsg, :stackTrace, CURRENT_TIMESTAMP, :ip)");
+            $qry->execute([
+                "errorMsg" => $e->getMessage(),
+                "stackTrace" => $e->getTraceAsString(),
+                "ip" => Utilities::GetClientIP()
+            ]);
+
+            $id = $db->lastInsertId();
+        } catch (Exception $o) {
+
+        } finally {
+            return $id;
+        }
+    }
+
+    private function TrySendEmail(Exception $e, int $idx) {
+        try {
+            $date = (new DateTime())->format("d/m/y H:i:s");
+            $output = "Exception #{$idx} caught at {$date}:" . "<br><hr>";
+            $output .= $e->getMessage() . "<br>";
+            $output .= $e->getTraceAsString();
+
+            $mail = new PHPMailer();
+            $mail->IsSMTP();
+            $mail->Host = "smtp.hostinger.com";
+            $mail->Port = 465;
+            $mail->SMTPAuth = true;
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+
+            $mail->From = $_ENV['exc_email'];
+            $mail->FromName = "hayNoche";
+
+            $mail->Username = $_ENV['exc_email'];
+            $mail->Password = $_ENV['exc_password'];
+
+            $mail->Sender = $_ENV['exc_email'];
+            $mail->Subject = "[#{$idx} - {$date}]: Exception";
+            
+            $mail->IsHTML(true);
+            $mail->Body = $output;
+            
+            $mail->AddAddress($_ENV['exc_email_to']);
+
+            $mail->Send();
+        } catch (Exception $o) {}
     }
 
 }
