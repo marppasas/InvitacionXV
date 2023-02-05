@@ -239,7 +239,7 @@ class App {
             $mail->Password = $_ENV['exc_password'];
 
             $mail->Sender = $_ENV['exc_email'];
-            $mail->Subject = "[#{$idx} - {$date}]: Exception";
+            $mail->Subject = "[{$date}]: Exception";
             
             $mail->IsHTML(true);
             $mail->Body = $output;
