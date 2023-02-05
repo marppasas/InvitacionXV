@@ -31,18 +31,11 @@ export class DownloadPageComponent implements OnInit {
         const input: string = this.form.controls['passcode'].value.toString();
         this.downloadService.getAllAsist(input).subscribe(r => {
             if (r.status) {
-                if (r.content.length) {
-                    const columns = Object.keys(r.content[0]);
-                    const csv: any[][] = [columns];
-                    for (let row of r.content) {
-                        const c = Object.values(row);
-                        csv.push(c);
-                    }
-
-                    this.downloadImpl(csv.map(e => e.join(",")).join("\n"));
+                if (this.downloadService.download(r.content)) {
+                    this.dialogService.confirm('Archivo descargado', 'Has descargado el archivo con la información de los invitados.');
+                } else {
+                    this.dialogService.confirm('¡Ups!', 'Aún no hay invitados confirmados en la página.');
                 }
-
-                this.dialogService.confirm('Archivo descargado', 'Has descargado el archivo con la información de los invitados.');
             } else {
                 this.downloadInput.manuallySetErrorMessage(r.content.code == 401 ? 'La contraseña es incorrecta.' : 'Ha ocurrido un error inesperado.');
             }
@@ -53,16 +46,6 @@ export class DownloadPageComponent implements OnInit {
         this.form = this.fb.group({
             passcode: new FormControl('', [ Validators.required ]),
         });
-    }
-
-    private downloadImpl(str: string): void {
-        const dataStr = "data:text/csv;charset=utf-8," + encodeURIComponent(str);
-        const a = document.createElement('a');
-        document.body.appendChild(a);
-        a.setAttribute("href", dataStr);
-        a.setAttribute("download", "invitados.csv");
-        a.click();
-        a.remove();
     }
 
 }
