@@ -79,7 +79,7 @@ class AsistController extends ControllerBase {
             return $this->Unauthorized();
         }
 
-        $qry = $this->db->prepare('SELECT firstName as Nombre, lastName as Apellido, dni as CI, foodTags as Menu, useBus as UsaTransporte, phone as Teléfono FROM asist WHERE deletedDateTime IS NULL');
+        $qry = $this->db->prepare("SELECT firstName as Nombre, lastName as Apellido, dni as CI, foodTags as Menu, (CASE WHEN useBus = 1 THEN 'Si' ELSE 'No' END) as UsaTransporte, phone as Teléfono FROM asist WHERE deletedDateTime IS NULL");
         $qry->execute();
         $result = $qry->fetchAll(PDO::FETCH_ASSOC);
 
