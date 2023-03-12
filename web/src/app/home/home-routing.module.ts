@@ -1,9 +1,9 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { BrunaXVPageComponent } from "./presentation/components";
+import { HomePageComponent } from "./presentation/components";
 
 const routes: Routes = [
-    { path: '', component: BrunaXVPageComponent },
+    { path: '', component: HomePageComponent },
     { path: '**', redirectTo: '' }
 ];
 
@@ -15,4 +15,4 @@ const routes: Routes = [
         RouterModule
     ]
 })
-export class BrunaXVRoutingModule {}
+export class HomeRoutingModule {}

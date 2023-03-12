@@ -1,18 +1,16 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
-import { Observable, Subject } from "rxjs";
 import { ValidatorsExtension } from "src/app/core/extensions";
 import { MapOptions, Tag } from "src/app/core/presentation/components";
-import { ApiServiceResult } from "src/app/core/presentation/services/api-base.service";
 import { DialogService } from "src/app/core/presentation/services/dialog.service";
-import { BrunaXVService } from "../../services/brunaxv.service";
+import { HomeService } from "../../services/home.service";
 
 @Component({
-    selector: 'app-brunaxv-page',
-    templateUrl: './brunaxv-page.component.html',
-    styleUrls: [ './brunaxv-page.component.scss' ] 
+    selector: 'app-home-page',
+    templateUrl: './home-page.component.html',
+    styleUrls: [ './home-page.component.scss' ] 
 })
-export class BrunaXVPageComponent implements OnInit {
+export class HomePageComponent implements OnInit {
 
     public form: FormGroup;
     public mapOptions: MapOptions;
@@ -23,7 +21,7 @@ export class BrunaXVPageComponent implements OnInit {
 
     constructor(
         private fb: FormBuilder,
-        private homeService: BrunaXVService,
+        private homeService: HomeService,
         private dialogService: DialogService,
     ) {}
 
@@ -55,35 +53,8 @@ export class BrunaXVPageComponent implements OnInit {
             return;
         }
 
-        this.homeService.sendAsist(
-            this.form.controls['firstName'].value,
-            this.form.controls['lastName'].value,
-            this.form.controls['dni'].value,
-            this.form.controls['foodTags'].value,
-            this.form.controls['bus'].value,
-            this.form.controls['phone'].value,
-            override
-        ).subscribe((s) => {
-            if (!s.status) {
-                let msg: string;
-                let dniConfirmed: boolean = false;
-                if (typeof s.content == 'string') {
-                    msg = s.content;
-                } else {
-                    msg = s.content.body as string;
-                    dniConfirmed = s.content.code == '-6';
-                    if (dniConfirmed) {
-                        msg += ' ¿Querés volver a enviar los datos?';
-                    }
-                }
-                this.dialogService.confirm('Ups!', msg, 'Aceptar', () => {
-                    if (dniConfirmed) {
-                        this.sendAsist(true);
-                    }
-                });
-            } else {
-                this.dialogService.confirm('Muchas gracias!', 'Tu asistencia fue confirmada.', 'Aceptar', () => { });
-            }
+        this.homeService.sendAsist().subscribe(() => {
+            this.dialogService.confirm('Muchas gracias!', 'Tu asistencia fue confirmada.', 'Aceptar', () => { });
         });
     }
 

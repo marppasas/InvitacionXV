@@ -2,9 +2,9 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 
 const routes: Routes = [
-    { path: 'brunaxv', loadChildren: () => import('./brunaxv/brunaxv.module').then(t => t.BrunaXVModule) },
+    { path: 'home', loadChildren: () => import('./home/home.module').then(t => t.HomeModule) },
     { path: 'download', loadChildren: () => import('./download/download.module').then(t => t.DownloadModule) },
-    { path: '**', redirectTo: 'brunaxv' },
+    { path: '**', redirectTo: 'home' },
 ];
 
 @NgModule({

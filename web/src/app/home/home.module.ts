@@ -1,11 +1,11 @@
 import { NgModule } from "@angular/core";
-import { BrunaXVRoutingModule } from "./brunaxv-routing.module";
+import { HomeRoutingModule } from "./home-routing.module";
 import { PresentationModule } from "./presentation/presentation.module";
 
 @NgModule({
     imports: [
-        BrunaXVRoutingModule,
+        HomeRoutingModule,
         PresentationModule,
     ]
 })
-export class BrunaXVModule {}
+export class HomeModule {}

@@ -1,1 +1,0 @@
-export * from './brunaxv-page/brunaxv-page.component';
